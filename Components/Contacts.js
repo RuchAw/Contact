@@ -3,6 +3,7 @@ import { View, SectionList, Text, StyleSheet, TouchableOpacity } from 'react-nat
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
+import stylesLess from '../couleurs_base.less';
 
 
 function Contacts() {
@@ -94,8 +95,8 @@ function Contacts() {
                         <Text style={{ color: 'hsl(24, 2%, 40%)', fontWeight: '300', fontSize: 19 }}>{item.entreprise}</Text>
                     </View>
                 </View>
-                <View style={styles.badge}>
-                    <Text style={{ color: `white` }}>
+                <View style={[styles.badge, stylesLess[`${item.statut_couleur}Bg`]]}>
+                    <Text style={stylesLess[`${item.statut_couleur}`]}>
                         {item.statut_label}
                     </Text>
                 </View>
@@ -169,7 +170,6 @@ const styles = StyleSheet.create({
     badge: {
         padding: 8,
         marginHorizontal: 10,
-        backgroundColor: 'gray',
         borderRadius: 25
     }
 
