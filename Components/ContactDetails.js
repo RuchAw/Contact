@@ -45,13 +45,13 @@ function ContactDetails({ route }) {
           colors={['hsl(185, 44%, 50%)', 'hsl(185, 44%, 20%)']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          style={{ padding: 10 }}
+          style={{ padding: 10, paddingBottom: 20 }}
           
         >
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <View style={{flexDirection: 'row'}}>
-                    <Icon onPress={handleBackPress} name="chevron-back-outline" color="hsl(24, 2%, 52%)" size={18}></Icon>
-                    <Text>
+                    <Icon onPress={handleBackPress} name="chevron-back-outline" color="white" size={16}></Icon>
+                    <Text style={{color: 'white'}}>
                         Contacts
                     </Text>
                 </View>
@@ -60,7 +60,7 @@ function ContactDetails({ route }) {
                 </View>
                 <View>
                     <TouchableOpacity>
-                        <Text>
+                        <Text style={{color: 'white'}}>
                             Modifier
                         </Text>
                     </TouchableOpacity>
@@ -69,8 +69,9 @@ function ContactDetails({ route }) {
             </View>
           <View style={{ padding: 5, flexDirection: 'row', alignItems: "center", justifyContent: 'space-between' }}>
             <View style={{ flexDirection: 'row', alignItems: "center" }}>
-              <Image source={require('../assets/images/fakeimg.jpg')} style={{ width: 60, height: 60, borderRadius: 30 }} />
-              {details.contact && <View style={{ marginLeft: 10 }}>
+              <Image source={require('../assets/images/fakeimg.jpg')} style={{ width: 80, height: 80, borderRadius: 40 }} />
+              {details.contact && 
+              <View style={{ marginLeft: 10 }}>
                 <Text style={{ color: 'white', fontSize: 25 }}>{details?.contact.prenom} {details?.contact.nom}</Text>
                 <Text style={{ color: 'white', fontWeight: '200' }}>{details?.entreprise.nom}</Text>
                 <Text style={{ color: 'white', fontWeight: '200' }}>{details?.contact.e_mail}</Text>
@@ -78,13 +79,13 @@ function ContactDetails({ route }) {
               </View>}
               
             </View>
-    
-            <View style={{ flexDirection: 'row', alignItems: "center"}}>
-              <TouchableOpacity onPress={() => console.log('Mail pressed')}>
-                <Icon name="mail-outline" color='white' size={30}></Icon>
+
+            <View style={{ flexDirection: 'row', justifyContent: "space-between", width: '25%'}}>
+              <TouchableOpacity onPress={() => console.log('Mail pressed')} >
+                <Icon name="mail-outline" color='white' size={40}></Icon>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => console.log('Call Pressed')}>
-                <Icon name="call-outline" color='white' size={30}></Icon>
+                <Icon name="call-outline" color='white' size={40}></Icon>
               </TouchableOpacity>
             </View>
           </View>
