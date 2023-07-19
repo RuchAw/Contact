@@ -135,7 +135,8 @@ function Contacts() {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 0,
+        paddingHorizontal: 0,
+        paddingBottom: 20,
         backgroundColor: 'hsl(24, 2%, 91%)'
     },
     contactHeader: {
@@ -163,6 +164,7 @@ const styles = StyleSheet.create({
     sectionHeaderText: {
         fontWeight: 'bold',
         fontSize: 18,
+        color: 'hsl(24, 2%, 55%)'
     },
     cardInfo: {
         flexDirection: 'row'

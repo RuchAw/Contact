@@ -3,6 +3,7 @@ import { View, SectionList, Text, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
+import FooterTab from './FooterTab';
 
 function ContactDetails({ route }) {
 
@@ -99,10 +100,13 @@ function ContactDetails({ route }) {
     }, [loaded]);
 
     return (
-        <View>
-            <Text>
-                Contact details
-            </Text>
+        <View style={{flexDirection:'column', flex: 1}}>
+            <View>
+                <Text>
+                    Contact details
+                </Text>
+            </View>        
+            <FooterTab navigation={navigation} contact={route.params}/>
         </View>
     )
 }

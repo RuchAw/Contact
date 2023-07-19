@@ -7,6 +7,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Contacts from './Components/Contacts';
 import ContactDetails from './Components/ContactDetails';
+import Notes from './Components/Notes';
+import Affaires from './Components/Affaires';
+import Taches from './Components/Taches';
+import Autres from './Components/Autres';
+import Infos from './Components/Infos';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -186,6 +192,26 @@ export default function App() {
           <Stack.Screen
             name="ContactDetails"
             component={ContactDetails}
+          />
+          <Stack.Screen
+            name="Notes"
+            component={Notes}
+          />
+          <Stack.Screen
+            name="Affaires"
+            component={Affaires}
+          />
+          <Stack.Screen
+            name="Autres"
+            component={Autres}
+          />
+          <Stack.Screen
+            name="Taches"
+            component={Taches}
+          />
+          <Stack.Screen
+            name="Infos"
+            component={Infos}
           />
         </Stack.Navigator>
       </NavigationContainer>
