@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View, SectionList, Text, Image, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FooterTab from './FooterTab';
 
 function ContactDetails({ route }) {
 
-    console.log(route.params.cle);
+    // console.log(route.params.cle);
 
     const [details, setDetails] = useState({});
     const [loaded, setLoaded] = useState(false);
@@ -22,12 +22,10 @@ function ContactDetails({ route }) {
 
             let detailsResponse = await fetch(detailsUrl);
             let detailsRawData = await detailsResponse.json();
-            // console.log(detailsRawData);
            
             setDetails(detailsRawData);
 
-            console.log(detailsRawData);
-            console.log(details);
+            // console.log(detailsRawData);
 
             setLoaded(true);
         } catch (error) {
@@ -101,12 +99,8 @@ function ContactDetails({ route }) {
 
     return (
         <View style={{flexDirection:'column', flex: 1}}>
-            <View>
-                <Text>
-                    Contact details
-                </Text>
-            </View>        
-            <FooterTab navigation={navigation} contact={route.params}/>
+            {(loaded) &&
+            <FooterTab navigation={navigation} contact_details={details}/>}
         </View>
     )
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Notes from "./Notes";
 import Affaires from "./Affaires";
@@ -10,7 +9,7 @@ import Autres from "./Autres";
 
 const Tab = createBottomTabNavigator();
 
-function FooterTab({ navigation, contact }) {
+function FooterTab({ navigation, contact_details }) {
   return (
     <Tab.Navigator
       initialRouteName="Infos"
@@ -19,14 +18,17 @@ function FooterTab({ navigation, contact }) {
         tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'white',
         tabBarStyle:{
-            backgroundColor: 'hsl(24, 2%, 52%)',
+            backgroundColor: 'hsl(24, 2%, 52%)'
+        }, 
+        tabBarLabelStyle:{
+            fontSize: 12,
         }
       }}
     >
       <Tab.Screen
         name="Infos"
         component={Infos}
-        initialParams={{contact: contact}}
+        initialParams={{contact_details}}
         options={{
           tabBarLabel: "Infos",
           tabBarIcon: ({ color }) => (
@@ -34,9 +36,6 @@ function FooterTab({ navigation, contact }) {
               name="information-circle-outline"
               color={ color }
               size={35}
-              onPress={() => {
-                navigation.navigate("Infos", contact);
-              }}
             />
           ),
         }}
@@ -51,9 +50,6 @@ function FooterTab({ navigation, contact }) {
               name="pencil-outline"
               color={ color }
               size={35}
-              onPress={() => {
-                navigation.navigate("Notes");
-              }}
             />
           ),
         }}
@@ -68,9 +64,6 @@ function FooterTab({ navigation, contact }) {
               name="calendar-outline"
               color={ color }
               size={35}
-              onPress={() => {
-                navigation.navigate("Notes");
-              }}
             />
           ),
         }}
@@ -85,9 +78,6 @@ function FooterTab({ navigation, contact }) {
               name="disc-outline"
               color={ color }
               size={35}
-              onPress={() => {
-                navigation.navigate("Notes");
-              }}
             />
           ),
         }}
@@ -102,9 +92,6 @@ function FooterTab({ navigation, contact }) {
               name="menu-outline"
               color={ color }
               size={35}
-              onPress={() => {
-                navigation.navigate("Autres");
-              }}
             />
           ),
         }}
