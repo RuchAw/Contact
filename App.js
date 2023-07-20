@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { View, Text, Button, Image, TouchableOpacity, StyleSheet, FlatList, ImageBackground, TextInput } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -12,10 +12,11 @@ import Affaires from './Components/Affaires';
 import Taches from './Components/Taches';
 import Autres from './Components/Autres';
 import Infos from './Components/Infos';
+import Tile from './Components/Tile';
+import ContactsHeader from './Components/ContactsHeader';
 
 
 const Stack = createNativeStackNavigator();
-
 
 export default function App() {
 
@@ -54,46 +55,20 @@ export default function App() {
   function ScreenWithButton() {
 
     return function ({ navigation }) {
-      const handleCardPress = (item) => {
-        navigation.navigate(`${item.title}`);
-      };
-
-
-      const renderCard = ({ item }) => (
-        <TouchableOpacity
-          onPress={() => handleCardPress(item)}
-        >
-
-          <View style={styles.card}>
-            <ImageBackground source={item.image} style={styles.cardBackGroundImage}>
-              <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                <Text style={styles.count}>{item.count}</Text>
-              </View>
-              <View>
-                <Text style={styles.title}>{item.title}</Text>
-              </View>
-            </ImageBackground>
-          </View>
-
-        </TouchableOpacity>
-      );
 
       return (
         <View style={{ alignItems: "center", justifyContent: 'space-between' }}>
           <FlatList
             data={data}
             numColumns={2}
-            renderItem={renderCard}
+            renderItem={({item}) => <Tile item={item} navigation={navigation} />}
             keyExtractor={(item) => item.id}
             contentContainerStyle={styles.container}
           />
         </View>
       );
     };
-
-
   }
-
 
   //The gray bar
   const BarComponent = () => {
@@ -104,7 +79,7 @@ export default function App() {
   };
 
   //Home Header 
-  const renderHomeHeader = () => (
+  const HomeHeader = () => (
     <LinearGradient
       colors={['hsl(185, 44%, 50%)', 'hsl(185, 44%, 20%)']}
       start={{ x: 0, y: 0 }}
@@ -132,37 +107,7 @@ export default function App() {
     </LinearGradient>
   );
 
-  //Contacts Header
-  const renderContactHeader = () => (
-    <LinearGradient
-      colors={['hsl(185, 44%, 50%)', 'hsl(185, 44%, 20%)']}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 0 }}
-      style={{ padding: 10 }}
-    >
-      <View style={{ padding: 5, flexDirection: 'row', alignItems: "center", justifyContent: 'space-around' }}>
-        <View style={{ flexDirection: 'row', alignItems: "center" }}>
-          <View style={styles.searchBarContainer}>
-              <TextInput style={styles.searchInput} placeholder="Search" />
-              <Icon name="search-outline" style={styles.searchIcon} size={40} color='white'/>
-            </View>
-        </View>
-
-        <View style={{ flexDirection: 'row', alignItems: "center" }}>
-          <TouchableOpacity onPress={() => console.log('Notification Bell Pressed')}>
-            <Icon name="notifications-outline" color='white' size={30}></Icon>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log('Sandwich Menu Pressed')}>
-            <Icon name="menu-outline" color='white' size={30}></Icon>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </LinearGradient>
-  );
-
-
-  //The cards grid
-
+  //The tiles grid
   const data = [
     { id: '1', title: 'Contacts', image: require('./assets/images/Contacts.png'), count: dataFromApi.contact },
     { id: '2', title: 'Tâches', image: require('./assets/images/Taches.png'), count: dataFromApi.action },
@@ -182,12 +127,12 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={ScreenWithButton()}
-            options={{header : ()=>renderHomeHeader()}}
+            options={{header : ()=>HomeHeader()}}
           />
           <Stack.Screen
             name="Contacts"
             component={Contacts}
-            options={{header: ()=>renderContactHeader()}}
+            options={{header: ()=>ContactsHeader()}}
           />
           <Stack.Screen
             name="ContactDetails"
@@ -222,61 +167,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-  },
-  card: {
-    backgroundColor: 'hsl(24, 2%, 75%)',
-    borderRadius: 8,
-    paddingHorizontal: 5,
-    paddingVertical: 2,
-    marginHorizontal: 20,
-    marginVertical: 8,
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    height: 155,
-    width: 150,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: "hsl(24, 2%, 95%)"
-  },
-  count: {
-    fontSize: 36,
-    fontWeight: 'bold',
-    color: "hsl(24, 2%, 95%)"
-  },
-  cardBackGroundImage: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignContent: 'center',
-    width: 140,
-    height: 145,
-    resizeMode: 'contain',
-  },
-  searchBar:{
-    height: 40, 
-    borderColor: 'gray', 
-    borderWidth: 0, 
-    padding: 0,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    width: '92%'
-  },
-  searchBarContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderRadius: 25,
-    width: '92%'
-  },
-  searchInput: {
-    flex: 1,
-    paddingVertical: 8,
-    paddingHorizontal: 18,
-  },
-  searchIcon: {
-    backgroundColor: 'hsl(185, 44%, 65%)',
-    borderRadius: 25,
-  },
+  }
 });

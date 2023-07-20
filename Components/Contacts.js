@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, SectionList, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, SectionList, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import stylesLess from '../couleurs_base.less';
+import ContactCard from './ContactCard';
 
 
 function Contacts() {
@@ -28,7 +28,7 @@ function Contacts() {
             //Fetching contacts for the first time
             let contactsResponse = await fetch(contactsUrl);
             let contactsRawData = await contactsResponse.json();
-            console.log(contactsRawData.next_page_url);
+            // console.log(contactsRawData.next_page_url);
             allContacts = contactsRawData.data;
 
             //While there is a next page fetch data
@@ -81,29 +81,6 @@ function Contacts() {
         return sections;
     };
 
-    const handleContactPress = (contact) => {
-        navigation.navigate('ContactDetails',contact);
-    };
-
-    const renderContact = ({ item }) => (
-        <TouchableOpacity onPress={() => handleContactPress(item)}>
-            <View style={styles.card}>
-                <View style={styles.cardInfo}>
-                    <Icon name="person-circle-outline" color="hsl(24, 2%, 52%)" size={50} />
-                    <View style={{ marginLeft: 10 }}>
-                        <Text style={{ color: 'hsl(24, 2%, 25%)', fontSize: 25 }}>{item.prenom}</Text>
-                        <Text style={{ color: 'hsl(24, 2%, 40%)', fontWeight: '300', fontSize: 19 }}>{item.entreprise}</Text>
-                    </View>
-                </View>
-                <View style={[styles.badge, stylesLess[`${item.statut_couleur}Bg`]]}>
-                    <Text style={stylesLess[`${item.statut_couleur}`]}>
-                        {item.statut_label}
-                    </Text>
-                </View>
-            </View>
-        </TouchableOpacity>
-    );
-
     const renderSectionHeader = ({ section }) => (
         <View style={styles.sectionHeader}>
             <Text style={styles.sectionHeaderText}>{section.letter}</Text>
@@ -125,7 +102,7 @@ function Contacts() {
                 <SectionList
                     sections={getSections()}
                     keyExtractor={(item) => item.cle.toString()}
-                    renderItem={renderContact}
+                    renderItem={ContactCard}
                     renderSectionHeader={renderSectionHeader}
                 />
             </View>
@@ -148,15 +125,6 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         fontSize: 18
     },
-    card: {
-        flexDirection: 'row',
-        justifyContent: "space-between",
-        backgroundColor: "hsl(24, 2%, 98%)",
-        borderWidth: 0.2,
-        borderColor: 'hsl(24, 2%, 52%)',
-        alignItems: 'center',
-        paddingVertical: 3
-    },
     sectionHeader: {
         paddingHorizontal: 6,
         paddingVertical: 8,
@@ -166,15 +134,11 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'hsl(24, 2%, 55%)'
     },
-    cardInfo: {
-        flexDirection: 'row'
-    },
     badge: {
         padding: 8,
         marginHorizontal: 10,
         borderRadius: 25
     }
-
 });
 
 export default Contacts
