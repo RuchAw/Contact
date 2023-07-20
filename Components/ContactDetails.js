@@ -4,6 +4,8 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FooterTab from './FooterTab';
+import { Linking } from 'react-native'
+
 
 function ContactDetails({ route }) {
 
@@ -80,10 +82,10 @@ function ContactDetails({ route }) {
             </View>
 
             <View style={{ flexDirection: 'row', justifyContent: "space-between", width: '25%'}}>
-              <TouchableOpacity onPress={() => console.log('Mail pressed')} >
+              <TouchableOpacity onPress={() => Linking.openURL(`mailto:${details?.contact.e_mail}`) } >
                 <Icon name="mail-outline" color='white' size={40}></Icon>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => console.log('Call Pressed')}>
+              <TouchableOpacity onPress={() => Linking.openURL(`tel:${details?.contact.telephone_mobile}`)}>
                 <Icon name="call-outline" color='white' size={40}></Icon>
               </TouchableOpacity>
             </View>

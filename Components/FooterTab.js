@@ -18,11 +18,11 @@ function FooterTab({ navigation, contact_details }) {
         tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'white',
         tabBarStyle:{
-            backgroundColor: 'hsl(24, 2%, 52%)'
+            backgroundColor: 'hsl(24, 2%, 52%)',
         }, 
         tabBarLabelStyle:{
             fontSize: 12,
-        }
+        },
       }}
     >
       <Tab.Screen

@@ -5,11 +5,20 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 function Infos({ route }) {
   const [details, setDetails] = useState(route.params.contact_details);
-  const [isEnabledMail, setIsEnabledMail] = useState(false);
+
+  const [email, setEmail] = useState(details.contact.e_mail);
+  const [nom, setNom] = useState(details.contact.nom);
+  const [prenom, setPrenom] = useState(details.contact.prenom);
+  const [personalPhone, setPersonalPhone] = useState(
+    details.contact.telephone_mobile
+  );
+  const [fixPhone, setFixPhone] = useState(details.contact.telephone_fixe);
+
+  const [isEnabledMail, setIsEnabledMail] = useState(true);
   const toggleSwitchMail = () =>
     setIsEnabledMail((previousState) => !previousState);
 
-  const [isEnabledSms, setIsEnabledSms] = useState(false);
+  const [isEnabledSms, setIsEnabledSms] = useState(true);
   const toggleSwitchSms = () =>
     setIsEnabledSms((previousState) => !previousState);
 
@@ -19,14 +28,16 @@ function Infos({ route }) {
         <Text style={styles.identityText}>Nom</Text>
         <TextInput
           style={styles.identityTextInput}
-          value={details.contact.nom}
+          onChangeText={(text) => setNom(text)}
+          defaultValue={nom}
         />
       </View>
       <View style={styles.identityContainer}>
         <Text style={styles.identityText}>Prénom</Text>
         <TextInput
           style={styles.identityTextInput}
-          value={details.contact.prenom}
+          onChangeText={(text) => setPrenom(text)}
+          defaultValue={prenom}
         />
       </View>
       <View style={styles.identityContainer}>
@@ -35,7 +46,8 @@ function Infos({ route }) {
           <View style={styles.contactDetailsContainer}>
             <TextInput
               style={styles.contactDetailsTextInput}
-              value={details.contact.e_mail}
+              onChangeText={(text) => setEmail(text)}
+              defaultValue={email}
             />
             <Icon
               name="mail-outline"
@@ -56,13 +68,14 @@ function Infos({ route }) {
         </View>
       </View>
       <View style={styles.identityContainer}>
-        <View style={[styles.contactLine, {alignItems: 'flex-start'}]}>
+        <View style={[styles.contactLine, { alignItems: "flex-start" }]}>
           <View style={styles.doubleContact}>
-          <Text style={styles.identityText}>Téléphone mobile</Text>
+            <Text style={styles.identityText}>Téléphone mobile</Text>
             <View style={styles.contactDetailsContainer}>
               <TextInput
                 style={styles.contactDetailsTextInput}
-                value={details.contact.telephone_mobile}
+                onChangeText={(text) => setPersonalPhone(text)}
+                defaultValue={personalPhone}
               />
               <Icon
                 name="call-outline"
@@ -75,7 +88,8 @@ function Infos({ route }) {
             <View style={styles.contactDetailsContainer}>
               <TextInput
                 style={styles.contactDetailsTextInput}
-                value={details.contact.telephone_fixe}
+                onChangeText={(text) => setFixPhone(text)}
+                defaultValue={fixPhone}
               />
               <Icon
                 name="call-outline"
@@ -160,9 +174,9 @@ const styles = StyleSheet.create({
     transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }],
   },
   doubleContact: {
-    flexDirection : 'column',
-    gap: 7
-  }
+    flexDirection: "column",
+    gap: 7,
+  },
 });
 
 export default Infos;
